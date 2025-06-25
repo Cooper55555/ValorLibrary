@@ -1,16 +1,18 @@
-  const navButtons = document.querySelectorAll(".nav-btn");
-  navButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      navButtons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+const navButtons = document.querySelectorAll(".nav-btn");
+const settingsIcon = document.querySelector(".settings-icon");
 
-      const sectionId = btn.getAttribute("data-section");
-      document.querySelectorAll(".section").forEach(section => {
-        section.style.display = (section.id === sectionId) ? "" : "none";
-        section.classList.toggle("active", section.id === sectionId);
-      });
+navButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    navButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const sectionId = btn.getAttribute("data-section");
+    document.querySelectorAll(".section").forEach(section => {
+      section.style.display = (section.id === sectionId) ? "" : "none";
+      section.classList.toggle("active", section.id === sectionId);
     });
   });
+});
 
 function toggleTCGSettingsModal() {
   const modal = document.getElementById("settings-modal-tcg");
@@ -54,14 +56,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const agentDetails = document.getElementById("agentDetails");
   const backButton = document.getElementById("backButton");
   const pageTitle = document.getElementById("pageTitle");
-  const settings = document.getElementById("settings-container-id");
 
   backButton.addEventListener("click", () => {
     agentDetails.classList.add("hidden");
     agentGrid.classList.remove("hidden");
     backButton.classList.add("hidden");
     pageTitle.classList.remove("hidden");
-    settings.classList.remove("hidden"); // ✅ Re-show settings when returning
+
+    // Show nav buttons again
+    navButtons.forEach(btn => btn.classList.remove("hidden"));
   });
 
   function showAgentDetails(agent) {
@@ -69,7 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
     agentDetails.classList.remove("hidden");
     backButton.classList.remove("hidden");
     pageTitle.classList.add("hidden");
-    settings.classList.add("hidden"); // ✅ Hide settings when showing agent
+
+    // Hide nav buttons but keep settings visible
+    navButtons.forEach(btn => btn.classList.add("hidden"));
 
     agentDetails.innerHTML = "";
 

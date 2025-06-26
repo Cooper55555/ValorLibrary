@@ -508,6 +508,20 @@ h1 {
   transition: all 0.3s ease;
 }
 
+#backButton:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 140, 66, 0.3);
+  transform: translateY(-2px);
+}
+
+#backButton.active {
+  color: white;
+  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--primary-orange-dark) 100%);
+  border-color: var(--primary-orange);
+  box-shadow: 0 6px 20px rgba(255, 140, 66, 0.3);
+}
+
 #backButton.hidden {
   display: none;
 }
